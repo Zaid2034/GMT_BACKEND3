@@ -1,13 +1,13 @@
 const express = require ('express');
 const app = express ();
-const cors = require ('cors');
-const corsConfig={
-  origin:"*",
-  Credential:true,
-  methods:["GET","POST","PUT","DELETE"],
-}
-app.options("",cors(corsConfig))
-app.use(cors(corsConfig));
+// const cors = require ('cors');
+// const corsConfig={
+//   origin:"*",
+//   Credential:true,
+//   methods:["GET","POST","PUT","DELETE"],
+// }
+// app.options("",cors(corsConfig))
+// app.use(cors(corsConfig));
 const zod = require ('zod');
 const {User, TrackingToken} = require ('./db');
 const jwt = require ('jsonwebtoken');
