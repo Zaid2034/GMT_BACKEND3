@@ -1,6 +1,12 @@
 const express = require ('express');
-const cors = require ('cors');
 const app = express ();
+const cors = require ('cors');
+const corsConfig={
+  origin:"*",
+  Credential:true,
+  methods:["GET","POST","PUT","DELETE"],
+}
+app.use(cors(corsConfig));
 const zod = require ('zod');
 const {User, TrackingToken} = require ('./db');
 const jwt = require ('jsonwebtoken');
@@ -10,7 +16,7 @@ dotenv.config ();
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
-app.use (cors ());
+
 // app.use(cors({
 //     origin:['https://zaid-gmt-frontend.vercel.app/'],
 //     methods:['POST','GET'],
