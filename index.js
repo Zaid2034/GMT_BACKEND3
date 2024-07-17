@@ -1,13 +1,7 @@
 const express = require ('express');
 const app = express ();
-// const cors = require ('cors');
-// const corsConfig={
-//   origin:"*",
-//   Credential:true,
-//   methods:["GET","POST","PUT","DELETE"],
-// }
-// app.options("",cors(corsConfig))
-// app.use(cors(corsConfig));
+app.use (express.json ());
+const cors = require ('cors');
 const zod = require ('zod');
 const {User, TrackingToken} = require ('./db');
 const jwt = require ('jsonwebtoken');
@@ -18,12 +12,16 @@ dotenv.config ();
 const JWT_SECRET = process.env.JWT_SECRET;
 
 
-// app.use(cors({
-//     origin:['https://zaid-gmt-frontend.vercel.app/'],
-//     methods:['POST','GET'],
-//     credentials:true
-// }));
-app.use (express.json ());
+
+app.use (
+  cors ({
+    origin: '*',
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+    allowedHeaders: 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version',
+  })
+);
+
 
 const signUpSchema = zod.object ({
   email: zod.string (),
